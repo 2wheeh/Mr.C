@@ -34,7 +34,15 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'ui')
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github
+            ui
+          fetch-depth: 2
+      - name: Tag baseRef
+        run: |
+          git tag baseRef HEAD^1
       - name: Read .nvmrc
         working-directory: ./ui
         run: |
@@ -47,8 +55,8 @@ jobs:
       - name: Install dependencies
         working-directory: ./ui
         run: |
-          yarn install --frozen-lockfile
-      - name: Run UI unit tests
+          yarn install --immutable
+      - name: Run UI unit tests on affected packages
         working-directory: ./ui
         run: |
-          yarn test --coverage
+          yarn test:affected
