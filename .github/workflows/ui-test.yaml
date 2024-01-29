@@ -39,4 +39,4 @@ jobs:
       - name: Run UI unit tests on affected packages
         working-directory: ./ui
         run: |
-          yarn test:affected
+          yarn test:affected --passWithNoTests
