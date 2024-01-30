@@ -20,23 +20,28 @@ jobs:
             .github
             ui
           fetch-depth: 2
+
       - name: Tag baseRef
         run: |
           git tag baseRef HEAD^1
+
       - name: Read .nvmrc
         working-directory: ./ui
         run: |
           echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
         id: nvm
+
       - name: Use Node.js ${{ steps.nvm.outputs.NODE_VERSION }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
+
       - name: Install dependencies
         working-directory: ./ui
         run: |
           yarn install --immutable
+
       - name: Run UI unit tests on affected packages
         working-directory: ./ui
         run: |
-          yarn test:affected --passWithNoTests
+          yarn test:affected
