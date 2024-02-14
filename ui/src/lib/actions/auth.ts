@@ -11,10 +11,16 @@ export async function signIn() {
 }
 
 export async function signOut() {
-  const response = await fetch(`${process.env.BACKEND_URL}/api/v1/auth/sign-out`);
+  const mrcToken = cookies().get('mrcToken')?.value;
+  if (!mrcToken) return;
+
+  const response = await fetch(`${process.env.BACKEND_URL}/api/v1/auth/sign-out`, {
+    headers: { authorization: `Bearer ${mrcToken}` },
+  });
 
   if (!response.ok) {
     // TODO: handle error
+    return;
   }
 
   cookies().set('mrcToken', '', { expires: new Date(0) });
