@@ -1,38 +1,42 @@
-'use client';
-
 import Text from '@/components/atomic/text';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { signOut, signIn, getUserInfo } from '@/lib/actions/auth';
 
-export function SignButton({ isLoggedIn }: { isLoggedIn: boolean }) {
-  const router = useRouter();
+export async function SignButton() {
+  const isLoggedIn = !!(await getUserInfo());
 
   if (isLoggedIn) {
     return (
-      <button
+      <form
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onClick={async () => {
-          const res = await fetch('/api/v1/auth/sign-out');
+        action={async () => {
+          'use server';
 
-          if (res.ok) {
-            router.refresh();
-          } else {
-            // TODO: handle error - emit error toast ?
-          }
+          await signOut();
         }}
       >
-        <Text size="lg" weight="medium">
-          Sign Out
-        </Text>
-      </button>
+        <button>
+          <Text size="lg" weight="medium">
+            Sign Out
+          </Text>
+        </button>
+      </form>
     );
   }
 
   return (
-    <Link className="hover:cursor-pointer" href="/api/v1/google/sign-in">
-      <Text size="lg" weight="medium">
-        Sign In
-      </Text>
-    </Link>
+    <form
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      action={async () => {
+        'use server';
+
+        await signIn();
+      }}
+    >
+      <button>
+        <Text size="lg" weight="medium">
+          Sign In
+        </Text>
+      </button>
+    </form>
   );
 }
