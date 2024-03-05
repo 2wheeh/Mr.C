@@ -1,16 +1,26 @@
 import { AccessLevel, Idp } from '@prisma/client';
 import { Request, Response } from 'express';
 
-import { Review } from '@src/core/entities/review.entity';
+import { Reply, Review } from '@src/core/entities/review.entity';
 import { User } from '@src/core/entities/user.entity';
 import { ReviewService } from '@src/core/services/review/review.service';
-import { ReviewsPaginationResponse } from '@src/core/services/review/types';
+import {
+  RepliesPaginationResponse,
+  ReviewsPaginationResponse
+} from '@src/core/services/review/types';
 import { AccessLevelEnum, IdpEnum } from '@src/core/types';
 import { AppErrorCode, CustomError } from '@src/error/errors';
 
 import { Middleware } from '@controller/http/middleware';
-import { ListReviewsV1QueryParameter } from '@controller/http/review/request/review.v1.request';
-import { ListReviewsV1Response } from '@controller/http/review/response/review.v1.response';
+import {
+  ListRepliesV1QueryParameter,
+  ListReviewsV1QueryParameter,
+  ReviewV1PathParameter
+} from '@controller/http/review/request/review.v1.request';
+import {
+  ListRepliesV1Response,
+  ListReviewsV1Response
+} from '@controller/http/review/response/review.v1.response';
 import { ReviewV1Controller } from '@controller/http/review/review.v1.controller';
 
 function calculateTotalPageCount(entryCount: number, pageSize?: number) {
@@ -311,6 +321,217 @@ describe('Test review v1 controller', () => {
 
       try {
         await reviewController.listReviews(req, res);
+      } catch (error: unknown) {
+        expect(error).toBeInstanceOf(CustomError);
+        expect(error).toHaveProperty('code', AppErrorCode.INTERNAL_ERROR);
+      }
+    });
+  });
+
+  describe('Test list replies', () => {
+    const users: User[] = [];
+    const userCount = 3;
+    const reviewId = 100;
+    const replies: Reply[] = [];
+    const replyCountPerUser = 3;
+    const replyCount = userCount * replyCountPerUser;
+    const content = 'randomContent';
+
+    beforeAll(() => {
+      const currentDate = new Date();
+      const baseUserId = 'randomUserId';
+      const baseNickname = 'randomNickname';
+      const baseTag = '#TAG';
+
+      for (let i = 1; i <= userCount; i++) {
+        const userId = `${baseUserId}${i}`;
+
+        users.push(
+          new User(
+            userId,
+            `${baseNickname}${i}`,
+            `${baseTag}${i}`,
+            new IdpEnum(Idp.GOOGLE),
+            `${userId}${i}}@gmail.com`,
+            new AccessLevelEnum(AccessLevel.USER),
+            currentDate,
+            currentDate
+          )
+        );
+
+        for (let j = 1; j <= replyCountPerUser; j++) {
+          const baseReplyId = (i - 1) * replyCountPerUser;
+
+          replies.push(
+            new Reply(
+              baseReplyId + j,
+              reviewId,
+              userId,
+              content,
+              currentDate,
+              currentDate
+            )
+          );
+        }
+      }
+    });
+
+    it('should success when pagination and filter conditions are not specified', async () => {
+      const req = {
+        params: { reviewId: `${reviewId}` },
+        query: {}
+      } as unknown as Request<
+        ReviewV1PathParameter,
+        any,
+        any,
+        ListRepliesV1QueryParameter,
+        any
+      >;
+      const res = {
+        send: jest.fn()
+      } as unknown as Response<ListRepliesV1Response>;
+
+      const totalPageCount = calculateTotalPageCount(replyCount);
+      const pagination: RepliesPaginationResponse = {
+        direction: 'desc',
+        pageOffset: 1,
+        pageSize: 10,
+        totalEntryCount: replyCount,
+        totalPageCount
+      };
+      reviewService.getReplies = jest.fn(() =>
+        Promise.resolve({ users, replies, pagination })
+      );
+
+      const userMapById = users.reduce(
+        (acc, user) => acc.set(user.id, user),
+        new Map<string, User>()
+      );
+      const expectedRepliesResponse = replies.map((reply) =>
+        reviewController['buildReplyResponse'](
+          userMapById.get(reply.userId) as User,
+          reply
+        )
+      );
+
+      await reviewController.listReplies(req, res);
+
+      expect(reviewService.getReplies).toBeCalledTimes(1);
+      expect(reviewService.getReplies).toBeCalledWith({ reviewId });
+
+      expect(res.send).toBeCalledTimes(1);
+      expect(res.send).toBeCalledWith({
+        replies: expectedRepliesResponse,
+        pagination: {
+          direction: 'desc',
+          pageOffset: 1,
+          pageSize: 10,
+          totalEntryCount: replyCount,
+          totalPageCount
+        }
+      });
+    });
+
+    it('should success when paginaton conditions are specified', async () => {
+      const givenDirection = 'asc';
+      const givenPageOffset = 2;
+      const givenPageSize = 5;
+      const req = {
+        params: { reviewId: `${reviewId}` },
+        query: {
+          direction: givenDirection,
+          pageOffset: givenPageOffset,
+          pageSize: givenPageSize
+        }
+      } as unknown as Request<
+        ReviewV1PathParameter,
+        any,
+        any,
+        ListRepliesV1QueryParameter,
+        any
+      >;
+      const res = {
+        send: jest.fn()
+      } as unknown as Response<ListRepliesV1Response>;
+
+      const totalPageCount = calculateTotalPageCount(replyCount, givenPageSize);
+      const pagination: RepliesPaginationResponse = {
+        direction: givenDirection,
+        pageOffset: givenPageOffset,
+        pageSize: givenPageSize,
+        totalEntryCount: replyCount,
+        totalPageCount
+      };
+      reviewService.getReplies = jest.fn(() =>
+        Promise.resolve({ users, replies, pagination })
+      );
+
+      const userMapById = users.reduce(
+        (acc, user) => acc.set(user.id, user),
+        new Map<string, User>()
+      );
+      const expectedRepliesResponse = replies.map((reply) =>
+        reviewController['buildReplyResponse'](
+          userMapById.get(reply.userId) as User,
+          reply
+        )
+      );
+
+      await reviewController.listReplies(req, res);
+
+      expect(reviewService.getReplies).toBeCalledTimes(1);
+      expect(reviewService.getReplies).toBeCalledWith({
+        reviewId,
+        direction: req.query.direction,
+        pageOffset: req.query.pageOffset,
+        pageSize: req.query.pageSize
+      });
+
+      expect(res.send).toBeCalledTimes(1);
+      expect(res.send).toBeCalledWith({
+        replies: expectedRepliesResponse,
+        pagination: {
+          direction: req.query.direction,
+          pageOffset: req.query.pageOffset,
+          pageSize: req.query.pageSize,
+          totalEntryCount: replyCount,
+          totalPageCount
+        }
+      });
+    });
+
+    it('should fail when the reviewing user is not found', async () => {
+      const req = {
+        params: { reviewId: `${reviewId}` },
+        query: {}
+      } as unknown as Request<
+        ReviewV1PathParameter,
+        any,
+        any,
+        ListRepliesV1QueryParameter,
+        any
+      >;
+      const res = {
+        send: jest.fn()
+      } as unknown as Response<ListRepliesV1Response>;
+
+      const totalPageCount = calculateTotalPageCount(replyCount);
+      reviewService.getReplies = jest.fn(() =>
+        Promise.resolve({
+          users: users.splice(0, -1),
+          replies,
+          pagination: {
+            direction: 'desc',
+            pageOffset: 1,
+            pageSize: 10,
+            totalEntryCount: replyCount,
+            totalPageCount
+          }
+        })
+      );
+
+      try {
+        await reviewController.listReplies(req, res);
       } catch (error: unknown) {
         expect(error).toBeInstanceOf(CustomError);
         expect(error).toHaveProperty('code', AppErrorCode.INTERNAL_ERROR);
