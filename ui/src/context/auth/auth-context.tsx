@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { type ReactNode, createContext, useContext, useEffect, useState } from 'react';
 
 import { fetchSignOut, getUserSelf, linkToSignIn } from '@/lib/apis/auth/client';
 import { protectedPaths } from '@/lib/constants/auth';

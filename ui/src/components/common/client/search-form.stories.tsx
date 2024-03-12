@@ -1,7 +1,7 @@
+import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import SearchForm from '@/components/common/client/search-form';
-import { action } from '@storybook/addon-actions';
 
 const meta = {
   title: 'Common/SearchForm',

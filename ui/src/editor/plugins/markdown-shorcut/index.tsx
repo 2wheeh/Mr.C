@@ -1,5 +1,5 @@
+import { CODE, INLINE_CODE, TRANSFORMERS, type Transformer } from '@lexical/markdown';
 import { MarkdownShortcutPlugin as LexicalMarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
-import { TRANSFORMERS, CODE, INLINE_CODE, type Transformer } from '@lexical/markdown';
 
 const NO_USE = new Set<Transformer>([CODE, INLINE_CODE]);
 const TRANSFORMERS_IN_USE = TRANSFORMERS.filter((transformer) => !NO_USE.has(transformer));

@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
+import UserChip from '@/components/auth/client/user-chip';
 import Text from '@/components/common/server/text';
 import Time from '@/components/common/server/time';
-import UserChip from '@/components/auth/client/user-chip';
 
 import type { Review } from '@/lib/definitions/review';
 import { parseReviewContent } from '@/lib/utils/review/parse-review-content';

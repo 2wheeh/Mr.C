@@ -1,8 +1,9 @@
-import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 
 import { useEditorRef } from '@/context/review/editor-ref-context';
+
 import { EditorRefPlugin } from '@/editor/plugins/editor-ref';
 import { MarkdownShortcutPlugin } from '@/editor/plugins/markdown-shorcut';
 

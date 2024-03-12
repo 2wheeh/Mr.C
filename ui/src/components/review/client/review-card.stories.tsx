@@ -1,7 +1,7 @@
+import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ReviewCard } from '@/components/review/client/review-card';
-import { action } from '@storybook/addon-actions';
 
 const meta = {
   title: 'Review/ReviewCard',
