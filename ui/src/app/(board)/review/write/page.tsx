@@ -8,7 +8,7 @@ import Time from '@/components/common/server/time';
 import { CreateReviewButton } from '@/components/review/client/create-review-button';
 import ReviewTitle from '@/components/review/client/review-title';
 
-import { EditorRefProvider } from '@/context/editor/editor-ref-context';
+import { EditorRefProvider } from '@/context/review/editor-ref-context';
 import { ReviewProvider } from '@/context/review/review-context';
 
 const Editor = dynamic(() => import('@/editor'), {
