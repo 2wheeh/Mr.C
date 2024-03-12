@@ -1,7 +1,7 @@
 'use client';
 
 import { useToast } from '@/context/common/toast-context';
-import { useEditorRef } from '@/context/editor/editor-ref-context';
+import { useEditorRef } from '@/context/review/editor-ref-context';
 import { validateReviewFields } from '@/lib/utils/review/validate-review-fields';
 import React, {
   Dispatch,
