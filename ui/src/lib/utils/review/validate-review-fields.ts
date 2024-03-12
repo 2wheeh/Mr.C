@@ -1,5 +1,5 @@
-import type { EditorState, SerializedEditorState } from 'lexical';
 import { $isRootTextContentEmptyCurry } from '@lexical/text';
+import type { EditorState, SerializedEditorState } from 'lexical';
 
 import { getReviewContent } from '@/lib/utils/review/get-review-content';
 

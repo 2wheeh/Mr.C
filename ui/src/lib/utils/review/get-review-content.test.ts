@@ -1,13 +1,12 @@
+import { createHeadlessEditor } from '@lexical/headless';
 import {
   $createParagraphNode,
   $createTextNode,
   $getRoot,
-  type SerializedEditorState,
-  type LexicalEditor,
   type EditorState,
+  type LexicalEditor,
+  type SerializedEditorState,
 } from 'lexical';
-
-import { createHeadlessEditor } from '@lexical/headless';
 
 import { getReviewContent } from '@/lib/utils/review/get-review-content';
 

@@ -1,12 +1,15 @@
 'use client';
 
 import Title from '@/components/common/client/title';
+
 import { useToast } from '@/context/common/toast-context';
-import { useReview } from '@/context/review/review-context';
 import { useEditable } from '@/context/review/editable-context';
+import { useReview } from '@/context/review/review-context';
+
 import { useDebouncedCallback } from '@/hooks/common/use-debounced-callback';
-import { MAX_TITLE_LENGTH } from '@/lib/constants/review';
+
 import { MAX_MOVIE_NAME_LENGTH } from '@/lib/constants/common';
+import { MAX_TITLE_LENGTH } from '@/lib/constants/review';
 import { normalizeWhitespace } from '@/lib/utils/common/normalizeWhitespace';
 
 export default function ReviewTitle({

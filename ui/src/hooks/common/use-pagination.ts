@@ -1,4 +1,5 @@
 import { redirect, usePathname, useSearchParams } from 'next/navigation';
+
 import { generatePagination } from '@/lib/utils/common/generate-pagination';
 
 export function usePagination(totalPages: number) {

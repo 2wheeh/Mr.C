@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import type { EditorState } from 'lexical';
+import { useState } from 'react';
 
 import { useAuth } from '@/context/auth/auth-context';
+import { useEditable } from '@/context/review/editable-context';
 import { useEditorRef } from '@/context/review/editor-ref-context';
 import { useReview } from '@/context/review/review-context';
-import { useEditable } from '@/context/review/editable-context';
 
 export function useViewerHeader() {
   const { user } = useAuth();

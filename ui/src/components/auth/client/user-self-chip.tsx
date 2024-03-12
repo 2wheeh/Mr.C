@@ -2,6 +2,7 @@
 
 import UserChip from '@/components/auth/client/user-chip';
 import { UserchipSkeleton } from '@/components/skeletons';
+
 import { useAuth } from '@/context/auth/auth-context';
 
 export function UserSelfChip() {

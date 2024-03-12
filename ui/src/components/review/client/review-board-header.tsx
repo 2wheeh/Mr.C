@@ -1,10 +1,11 @@
 'use client';
 
-import Text from '@/components/common/server/text';
-import { BoardHeader } from '@/components/common/server/board-header';
-import SearchForm from '@/components/common/client/search-form';
 import Link from 'next/link';
 import { useState } from 'react';
+
+import SearchForm from '@/components/common/client/search-form';
+import { BoardHeader } from '@/components/common/server/board-header';
+import Text from '@/components/common/server/text';
 
 export function ReviewBoardHeader() {
   const [isSearching, setIsSearching] = useState(false); // TODO: initialize to true when query is set
