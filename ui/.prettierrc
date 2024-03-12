@@ -4,6 +4,16 @@
   "trailingComma": "es5",
   "singleQuote": true,
   "printWidth": 100,
-  "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindFunctions": ["clsx"]
+  "plugins": ["prettier-plugin-tailwindcss", "@trivago/prettier-plugin-sort-imports"],
+  "tailwindFunctions": ["clsx"],
+  "importOrder": [
+    "^@/components/(.*)$",
+    "^@/context/(.*)$",
+    "^@/editor(/(.*))?$",
+    "^@/hooks/(.*)$",
+    "^@/lib/(.*)$",
+    "^@/styles/(.*)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }
