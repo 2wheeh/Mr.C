@@ -1,8 +1,9 @@
 'use client';
 
 import Title from '@/components/common/client/title';
-import { useReview } from '@/context/review/review-context';
 import { useToast } from '@/context/common/toast-context';
+import { useReview } from '@/context/review/review-context';
+import { useEditable } from '@/context/review/editable-context';
 import { useDebouncedCallback } from '@/hooks/common/use-debounced-callback';
 import { MAX_TITLE_LENGTH } from '@/lib/constants/review';
 import { MAX_MOVIE_NAME_LENGTH } from '@/lib/constants/common';
@@ -40,6 +41,8 @@ export default function ReviewTitle({
     setValue(newText);
   };
 
+  const { isEditable } = useEditable() ?? {};
+
   return (
     <Title
       placeholder={placeholder}
@@ -47,6 +50,7 @@ export default function ReviewTitle({
       value={value}
       onChange={onChange}
       ref={ref}
+      readOnly={isEditable !== undefined ? !isEditable : false}
     />
   );
 }

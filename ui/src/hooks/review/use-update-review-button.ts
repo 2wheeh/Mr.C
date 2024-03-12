@@ -4,16 +4,20 @@ import { useReview } from '@/context/review/review-context';
 import { useToast } from '@/context/common/toast-context';
 import { useApiError } from '@/hooks/common/use-api-error';
 import { updateReview } from '@/lib/apis/review/client';
+import { useEditable } from '@/context/review/editable-context';
 
 export function useUpdateReivewButton() {
   const router = useRouter();
   const { id } = useParams();
   const { emitToast } = useToast();
 
+  const { setIsEditable } = useEditable() ?? {};
   const { disabled, setDisabled, validateAndGetData } = useReview();
   const { handleApiError } = useApiError();
 
   const handleUpdateReview = async () => {
+    if (!setIsEditable) return;
+
     setDisabled(true);
 
     const data = validateAndGetData();
@@ -25,6 +29,7 @@ export function useUpdateReivewButton() {
     try {
       await updateReview(Number(id), data);
 
+      setIsEditable(false);
       emitToast('리뷰 수정 완료', 'success');
       router.refresh();
     } catch (error) {
