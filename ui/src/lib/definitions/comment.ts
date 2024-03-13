@@ -1,6 +1,6 @@
 import type { Pagination } from '@/lib/definitions/common';
 
-interface Comment {
+export interface Comment {
   id: number; //123,
   userId: string; //"{UUID v4}",
   nickname: string; // "신비로운 평론가 붉은 여우",
@@ -25,3 +25,21 @@ export interface ListCommentsResponse {
 export interface ListCommentsQuery
   extends CommentFilter,
     Partial<Omit<Pagination, 'totalPageCount' | 'totalEntryCount'>> {}
+
+export interface CreateCommentRequest {
+  movieName: string;
+  content: string;
+}
+
+export interface CreateCommentResponse {
+  comment: Comment;
+}
+
+export interface UpdateCommentRequest {
+  movieName: string;
+  content: string;
+}
+
+export interface UpdateCommentResponse {
+  comment: Comment;
+}
