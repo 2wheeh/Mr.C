@@ -4,10 +4,13 @@ import { unstable_noStore as noStore } from 'next/cache';
 
 import type {
   GetReviewResponse,
+  ListRepliesQuery,
+  ListRepliesResponse,
   ListReviewsQuery,
   ListReviewsResponse,
 } from '@/lib/definitions/review';
 import dummyReviewList from '@/lib/dummy/review';
+import dummyRepliesList from '@/lib/dummy/review-reply';
 
 export async function listReviews(query: ListReviewsQuery): Promise<ListReviewsResponse> {
   noStore();
@@ -58,5 +61,35 @@ export async function getReview(id: string): Promise<GetReviewResponse> {
     return await new Promise((resolve) =>
       setTimeout(() => resolve({ review: dummyReviewList.reviews[Number(id) - 1] }), 1000)
     );
+  }
+}
+
+export async function listReplies(
+  reviewId: number,
+  query: ListRepliesQuery
+): Promise<ListRepliesResponse> {
+  noStore();
+
+  const params = Object.entries(query).reduce((acc, [key, value]) => {
+    if (value) {
+      acc.set(key, String(value));
+    }
+
+    return acc;
+  }, new URLSearchParams());
+
+  try {
+    const response = await fetch(
+      `${process.env.BACKEND_URL}/api/v1/reviews/${reviewId}/replies?${params.toString()}`
+    );
+
+    if (!response.ok) {
+      // TODO: build error msg properly
+      throw new Error(`Network Error: Failed to fetch replies list: ${response.statusText}`);
+    }
+
+    return (await response.json()) as ListRepliesResponse;
+  } catch (error) {
+    return await new Promise((resolve) => setTimeout(() => resolve(dummyRepliesList), 700));
   }
 }

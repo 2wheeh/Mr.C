@@ -50,7 +50,7 @@ export default function Text({
   return (
     <div
       className={clsx(
-        'm-0 p-0',
+        'm-0 p-0 break-words',
         sizeClass,
         weightClass,
         colorClass,

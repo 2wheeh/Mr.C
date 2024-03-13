@@ -1,14 +1,22 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import SearchForm from '@/components/common/client/search-form';
 import { BoardHeader } from '@/components/common/server/board-header';
 import Text from '@/components/common/server/text';
 
-export function ReviewBoardHeader() {
-  const [isSearching, setIsSearching] = useState(false); // TODO: initialize to true when query is set
+import { REVIEW_FILTERS } from '@/lib/constants/review';
+
+export function ReviewBoardHeader({ SEARCH_OPEN_KEY }: { SEARCH_OPEN_KEY: string }) {
+  const [isSearching, setIsSearching] = useState(SEARCH_OPEN_KEY.length > 0);
+
+  useEffect(() => {
+    if (SEARCH_OPEN_KEY.length > 0) {
+      setIsSearching(true);
+    }
+  }, [SEARCH_OPEN_KEY]);
 
   return (
     <BoardHeader>
@@ -26,7 +34,7 @@ export function ReviewBoardHeader() {
         </div>
         {isSearching && (
           <div className="pt-4">
-            <SearchForm filters={['title', 'nickname', 'movieName']} />
+            <SearchForm filters={REVIEW_FILTERS} />
           </div>
         )}
       </div>

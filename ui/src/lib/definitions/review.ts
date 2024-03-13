@@ -52,3 +52,38 @@ export interface UpdateReviewRequest {
 export interface UpdateReviewResponse {
   review: Review;
 }
+
+export interface Reply {
+  id: number; //123,
+  reviewId: number; //456,
+  userId: string; //"{UUID v4}",
+  nickname: string; //"신비로운 평론가 붉은 여우",
+  tag: string; //"#MQ3B",
+  content: string; //"{reply_content}",
+  createdAt: string; //"2023-04-02T15:08:00+09:00",
+  updatedAt: string; // "2023-04-02T15:08:00+09:00"
+}
+
+export interface ListRepliesQuery
+  extends Partial<Pick<Pagination, 'direction' | 'pageOffset' | 'pageSize'>> {}
+
+export interface ListRepliesResponse {
+  replies: Reply[];
+  pagination: Omit<Pagination, 'sortBy'>;
+}
+
+export interface CreateReplyRequest {
+  content: string;
+}
+
+export interface CreateReplyResponse {
+  reply: Reply;
+}
+
+export interface UpdateReplyRequest {
+  content: string;
+}
+
+export interface UpdateReplyResponse {
+  reply: Reply;
+}
