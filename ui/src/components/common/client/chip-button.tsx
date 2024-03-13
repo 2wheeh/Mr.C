@@ -12,7 +12,7 @@ export default function ChipButton({
   type = 'button',
   width,
 }: {
-  Text: ReactNode;
+  Text?: ReactNode;
   Icon?: ReactNode;
   onClick?: () => void;
   rounded: 'full' | 'lg';

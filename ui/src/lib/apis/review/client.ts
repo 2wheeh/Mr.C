@@ -2,12 +2,17 @@
 
 import type { HttpErrorResponse } from '@/lib/definitions/error';
 import type {
+  CreateReplyRequest,
+  CreateReplyResponse,
   CreateReviewRequest,
   CreateReviewResponse,
+  UpdateReplyRequest,
+  UpdateReplyResponse,
   UpdateReviewRequest,
   UpdateReviewResponse,
 } from '@/lib/definitions/review';
 import dummyReviewList from '@/lib/dummy/review';
+import dummyRepliesList from '@/lib/dummy/review-reply';
 
 export async function createReview(data: CreateReviewRequest): Promise<CreateReviewResponse> {
   try {
@@ -62,6 +67,66 @@ export async function updateReview(
     // TODO: DELETE THIS WHEN API IS READY
     return await new Promise((resolve) =>
       setTimeout(() => resolve({ review: dummyReviewList.reviews[Number(id) - 1] }), 500)
+    );
+  }
+}
+
+export async function createReply(
+  reviewId: number,
+  data: CreateReplyRequest
+): Promise<CreateReplyResponse> {
+  try {
+    const response = await fetch(`/api/v1/reviews/${reviewId}/replies`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      // TODO: build proper error message
+      throw new Error(`Network Error: Failed to fetch create reply: ${response.statusText}`);
+    }
+
+    return (await response.json()) as CreateReplyResponse;
+  } catch (error) {
+    // TODO: DELETE ME
+    return await new Promise((resolve) =>
+      setTimeout(() => resolve({ reply: dummyRepliesList.replies[0] }), 500)
+    );
+  }
+}
+
+export async function deleteReply(reviewId: number, replyId: number) {
+  const response = await fetch(`/api/v1/reviews/${reviewId}/replies/${replyId}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    // TODO: build proper error message
+    throw new Error(`Network Error: Failed to fetch delete reply: ${response.statusText}`);
+  }
+}
+
+export async function updateReply(
+  reviewId: number,
+  replyId: number,
+  data: UpdateReplyRequest
+): Promise<UpdateReplyResponse> {
+  try {
+    const response = await fetch(`/api/v1/reviews/${reviewId}/replies/${replyId}`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      // TODO: build proper error message
+      throw new Error(`Network Error: Failed to fetch update reply: ${response.statusText}`);
+    }
+
+    return (await response.json()) as UpdateReplyResponse;
+  } catch (error) {
+    // TODO: DELETE ME
+    return await new Promise((resolve) =>
+      setTimeout(() => resolve({ reply: dummyRepliesList.replies[0] }), 500)
     );
   }
 }
