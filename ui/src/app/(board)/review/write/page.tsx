@@ -11,6 +11,8 @@ import ReviewTitle from '@/components/review/client/review-title';
 import { EditorRefProvider } from '@/context/review/editor-ref-context';
 import { ReviewProvider } from '@/context/review/review-context';
 
+import { MAX_CONTENT_LENGTH } from '@/lib/constants/review';
+
 const Editor = dynamic(() => import('@/editor'), {
   ssr: false,
   loading: () => <div className="mx-auto my-5 h-[9.4rem] w-full"></div>,
@@ -49,7 +51,7 @@ export default function Page() {
               <ReviewTitle isMovieName placeholder="Movie" />
             </div>
 
-            <Editor namespace="review-editor" isNew />
+            <Editor namespace="review-editor" isNew maxLength={MAX_CONTENT_LENGTH} />
           </section>
         </main>
       </ReviewProvider>

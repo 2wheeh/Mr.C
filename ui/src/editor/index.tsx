@@ -5,6 +5,7 @@ import type { SerializedEditorState } from 'lexical';
 
 import nodes from '@/editor/nodes';
 import { Plugins } from '@/editor/plugins';
+import { EditorHistoryContext } from '@/editor/plugins/history/editor-history-context';
 import theme from '@/editor/theme';
 
 import '@/styles/editor.css';
@@ -14,10 +15,12 @@ export default function Editor({
   namespace,
   isNew,
   prepopulated,
+  maxLength,
 }: {
   namespace: string;
   isNew: boolean;
   prepopulated?: SerializedEditorState;
+  maxLength?: number;
 }) {
   const initialConfig: InitialConfigType = {
     editorState: JSON.stringify(prepopulated),
@@ -33,7 +36,9 @@ export default function Editor({
   return (
     <div className="editor">
       <LexicalComposer initialConfig={initialConfig}>
-        <Plugins />
+        <EditorHistoryContext>
+          <Plugins maxLength={maxLength} />
+        </EditorHistoryContext>
       </LexicalComposer>
     </div>
   );
