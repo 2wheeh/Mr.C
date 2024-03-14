@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 
+import { MAX_CONTENT_LENGTH } from '@/lib/constants/review';
 import { getHtml } from '@/lib/utils/review/get-html';
 import { parseReviewContent } from '@/lib/utils/review/parse-review-content';
 
@@ -14,5 +15,12 @@ export async function Viewer({ content }: { content: string }) {
     loading: () => <div className="editor" dangerouslySetInnerHTML={{ __html: html }} />,
   });
 
-  return <Editor namespace="review-editor" isNew={false} prepopulated={serializedEditorState} />;
+  return (
+    <Editor
+      namespace="review-editor"
+      isNew={false}
+      prepopulated={serializedEditorState}
+      maxLength={MAX_CONTENT_LENGTH}
+    />
+  );
 }
