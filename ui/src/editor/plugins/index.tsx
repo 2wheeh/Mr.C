@@ -7,6 +7,7 @@ import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
+import clsx from 'clsx';
 import { useState } from 'react';
 
 import { useEditorRef } from '@/context/review/editor-ref-context';
@@ -59,10 +60,12 @@ export function Plugins({ maxLength }: { maxLength?: number }) {
       <TabIndentationPlugin />
       <ListMaxIndentLevelPlugin maxDepth={3} />
       <HistoryPlugin />
-      <ComponentPickerMenuPlugin />
-      {maxLength && isEditable && <CharacterLimitPlugin charset="UTF-16" maxLength={maxLength} />}
+      <div className={clsx({ hidden: !isEditable })}>
+        <ComponentPickerMenuPlugin />
+        {maxLength && <CharacterLimitPlugin charset="UTF-16" maxLength={maxLength} />}
+        {anchorElem && <ToolbarPlugin anchorElem={anchorElem} />}
+      </div>
       {onRef !== undefined && <EditorRefPlugin editorRef={onRef} />}
-      {anchorElem && <ToolbarPlugin anchorElem={anchorElem} />}
     </>
   );
 }
