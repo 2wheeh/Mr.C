@@ -27,7 +27,10 @@ export async function ReplyCardsList({
       </div>
 
       <div id="replies" className="absolute -top-[108px]" />
-      <Pagination totalPages={pagination.totalPageCount} /* scrollToId="replies"*/ />
+      <Pagination
+        totalPages={pagination.totalPageCount}
+        direction="asc" /* scrollToId="replies"*/
+      />
     </div>
   ) : (
     // TODO: empty comment ui

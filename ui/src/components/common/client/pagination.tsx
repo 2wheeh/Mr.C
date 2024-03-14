@@ -75,8 +75,14 @@ function PaginationNumber({
   );
 }
 
-export default function Pagination({ totalPages }: { totalPages: number }) {
-  const { allPages, createPageURL, currentPage } = usePagination(totalPages);
+export default function Pagination({
+  totalPages,
+  direction = 'desc',
+}: {
+  totalPages: number;
+  direction?: 'asc' | 'desc';
+}) {
+  const { allPages, createPageURL, currentPage } = usePagination(totalPages, direction);
 
   return (
     <>
