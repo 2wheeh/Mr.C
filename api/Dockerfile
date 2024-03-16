@@ -17,7 +17,7 @@ COPY tsconfig.json \
 RUN npm run generate-models
 RUN npm run build
 
-FROM base as runner
+FROM --platform=linux/amd64 node:18-alpine as runner
 
 WORKDIR /app
 COPY package.json package.json
