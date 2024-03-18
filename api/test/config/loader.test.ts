@@ -16,7 +16,7 @@ describe('Test config loader', () => {
     expect(loadConfig()).toStrictEqual({
       env: 'test',
       timeout: { shutdownSeconds: 30 },
-      http: { host: '127.0.0.1', port: 0 },
+      http: { host: '127.0.0.1', port: 0, numTrustedProxies: 0 },
       logger: { level: 'silly', format: 'text' },
       database: {
         host: '127.0.0.1',
@@ -91,6 +91,7 @@ describe('Test build http config', () => {
       env: 'test',
       host: '127.0.0.1',
       port: 0,
+      numTrustedProxies: 0,
       cookieExpirationHours: 1
     });
   });

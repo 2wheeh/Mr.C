@@ -4,6 +4,7 @@ timeout:
 http:
   host: '127.0.0.1'
   port: 0 # PORT 0 randomly assigns a usable port. Set up for parallel testing.
+  numTrustedProxies: 0
 logger:
   level: 'silly' # Log only if less than or equal to this level
   format: 'text'

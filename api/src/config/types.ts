@@ -20,7 +20,9 @@ export interface ConfigTimeout {
 export interface ConfigHttp {
   host: string;
   port: number;
+  numTrustedProxies: number
 }
+
 
 export interface ConfigLogger {
   level: LogLevel;
