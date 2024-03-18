@@ -4,6 +4,7 @@ timeout:
 http:
   host: '127.0.0.1'
   port: 8080
+  numTrustedProxies: 0
 logger:
   level: 'http' # Log only if less than or equal to this level
   format: 'text'

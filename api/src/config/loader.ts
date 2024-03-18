@@ -52,6 +52,7 @@ export function buildHttpConfig(config: Config): HttpConfig {
     env: config.env,
     host: config.http.host,
     port: config.http.port,
+    numTrustedProxies: config.http.numTrustedProxies,
     cookieExpirationHours: config.jwt.expirationHour
   };
 }

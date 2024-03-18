@@ -47,7 +47,7 @@ export class HttpServer {
   public start = async (): Promise<void> => {
     this.app = express();
     this.app.disable('x-powered-by');
-    this.app.set('trust proxy', 0);
+    this.app.set('trust proxy', this.config.numTrustedProxies);
     this.app.use(express.json());
     await this.buildApiDocument();
     this.app.use('/api', cookieParser());
