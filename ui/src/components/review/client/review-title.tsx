@@ -7,6 +7,7 @@ import { useDebouncedCallback } from '@/hooks/common/use-debounced-callback';
 import { MAX_TITLE_LENGTH } from '@/lib/constants/review';
 import { MAX_MOVIE_NAME_LENGTH } from '@/lib/constants/common';
 import { normalizeWhitespace } from '@/lib/utils/common/normalizeWhitespace';
+import { useEditable } from '@/context/editor/editable-context';
 
 export default function ReviewTitle({
   placeholder,
@@ -40,6 +41,8 @@ export default function ReviewTitle({
     setValue(newText);
   };
 
+  const { isEditable } = useEditable() ?? {};
+
   return (
     <Title
       placeholder={placeholder}
@@ -47,6 +50,7 @@ export default function ReviewTitle({
       value={value}
       onChange={onChange}
       ref={ref}
+      readOnly={isEditable !== undefined ? !isEditable : false}
     />
   );
 }
