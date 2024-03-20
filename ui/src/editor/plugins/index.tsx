@@ -5,6 +5,7 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { useEditorRef } from '@/context/editor/editor-ref-context';
 import { MarkdownShortcutPlugin } from '@/editor/plugins/markdown-shorcut';
 import { EditorRefPlugin } from '@lexical/react/LexicalEditorRefPlugin';
+import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 
 function Placeholder() {
   return <div className="placeholder">Begin writing your review...</div>;
@@ -27,6 +28,7 @@ export function Plugins() {
         ErrorBoundary={LexicalErrorBoundary}
       />
       <MarkdownShortcutPlugin />
+      <ListPlugin />
       {onRef !== undefined && <EditorRefPlugin editorRef={onRef} />}
     </>
   );
