@@ -1,7 +1,8 @@
 'use client';
 
-import { type Locale, formatDateToLocal } from '@/lib/utils/common/format-date-to-local';
 import Text, { type TextProps } from '@/components/common/server/text';
+
+import { type Locale, formatDateToLocal } from '@/lib/utils/common/format-date-to-local';
 
 interface Props extends Omit<TextProps, 'children'> {
   dateStr: string;

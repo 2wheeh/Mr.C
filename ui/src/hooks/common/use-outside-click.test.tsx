@@ -1,5 +1,7 @@
 import { useRef } from 'react';
+
 import { useOutsideClick } from '@/hooks/common/use-outside-click';
+
 import { cleanup, click, clickRight, pointerDown, pointerUp, render } from '@/lib/test-utils';
 
 function OutsideClicker({ onOutsideClick }: { onOutsideClick: () => void }) {

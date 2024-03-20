@@ -1,5 +1,6 @@
-import { useOutsideClick } from '@/hooks/common/use-outside-click';
 import { useRef, useState } from 'react';
+
+import { useOutsideClick } from '@/hooks/common/use-outside-click';
 
 export function useDropdown<T extends HTMLElement>() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);

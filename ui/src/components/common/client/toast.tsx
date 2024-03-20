@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { CheckCircleIcon, ExclamationCircleIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { useEffect, useRef } from 'react';
 
 import Text from '@/components/common/server/text';
+
 import { PausibleTimer } from '@/lib/utils/common/pausible-timer';
 
 export interface ToastData {

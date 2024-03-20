@@ -1,5 +1,4 @@
 // TODO: Remove dummy after connected with backend apis
-
 import type { ListCommentsResponse } from '@/lib/definitions/comment';
 
 const dummyCommentList: ListCommentsResponse = {

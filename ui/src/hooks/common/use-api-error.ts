@@ -1,6 +1,7 @@
 'use client';
 
 import { useToast } from '@/context/common/toast-context';
+
 import { isErrorWithMessage } from '@/lib/utils/common/error';
 
 export function useApiError() {

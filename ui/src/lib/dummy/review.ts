@@ -1,5 +1,4 @@
 // TODO: Remove dummy after connected with backend apis
-
 import type { ListReviewsResponse } from '@/lib/definitions/review';
 
 const dummyReviewList: ListReviewsResponse = {

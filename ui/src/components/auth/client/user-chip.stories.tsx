@@ -1,8 +1,8 @@
+import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
-import { within, userEvent, expect } from '@storybook/test';
+import { expect, userEvent, within } from '@storybook/test';
 
 import UserChip from '@/components/auth/client/user-chip';
-import { action } from '@storybook/addon-actions';
 
 const meta = {
   title: 'Auth/UserChip',

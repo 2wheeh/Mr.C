@@ -1,6 +1,7 @@
 'use client';
 
 import Text from '@/components/common/server/text';
+
 import { useAuth } from '@/context/auth/auth-context';
 
 export default function SignButton() {

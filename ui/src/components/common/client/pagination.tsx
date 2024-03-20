@@ -1,14 +1,15 @@
 'use client';
 
-import { usePagination } from '@/hooks/common/use-pagination';
 import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
+
+import { usePagination } from '@/hooks/common/use-pagination';
 
 function PaginationArrow({
   type = 'single',

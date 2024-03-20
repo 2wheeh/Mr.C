@@ -1,13 +1,14 @@
-import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import { EditorRefPlugin } from '@lexical/react/LexicalEditorRefPlugin';
+import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
+import { ListPlugin } from '@lexical/react/LexicalListPlugin';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
 
 import { useEditorRef } from '@/context/editor/editor-ref-context';
-import { MarkdownShortcutPlugin } from '@/editor/plugins/markdown-shorcut';
-import { EditorRefPlugin } from '@lexical/react/LexicalEditorRefPlugin';
-import { ListPlugin } from '@lexical/react/LexicalListPlugin';
+
 import { HistoryPlugin } from '@/editor/plugins/history';
-import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
+import { MarkdownShortcutPlugin } from '@/editor/plugins/markdown-shorcut';
 import { MaxLengthPlugin } from '@/editor/plugins/max-length';
 
 function Placeholder() {
