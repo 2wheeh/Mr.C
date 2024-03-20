@@ -14,6 +14,7 @@ export async function createReview(data: CreateReviewRequest): Promise<CreateRev
     const response = await fetch('/api/v1/reviews', {
       method: 'POST',
       body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
     });
 
     if (!response.ok) {
@@ -44,6 +45,7 @@ export async function updateReview(
     const response = await fetch(`/api/v1/reviews/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
     });
 
     if (!response.ok) {
