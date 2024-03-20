@@ -8,9 +8,8 @@ import { Noto_Sans_KR as NotoSansKr } from 'next/font/google';
 export const notoSansKr = NotoSansKr({
   // 'korean' subset is not supported
   subsets: ['latin'],
-  // While loading, we don't show the text with
-  // fallback font til 3s at most (FOIT)
-  // instead of showing ugly font changing (FOUT).
-  display: 'block',
+  // So every korean characters are rendered
+  // with fallback font while the font is loading
+  display: 'swap',
   adjustFontFallback: true,
 });
