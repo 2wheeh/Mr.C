@@ -8,12 +8,13 @@ import { EditorRefPlugin } from '@lexical/react/LexicalEditorRefPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { HistoryPlugin } from '@/editor/plugins/history';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
+import { MaxLengthPlugin } from '@/editor/plugins/max-length';
 
 function Placeholder() {
   return <div className="placeholder">Begin writing your review...</div>;
 }
 
-export function Plugins() {
+export function Plugins({ maxLength }: { maxLength?: number }) {
   const { onRef } = useEditorRef() ?? {};
 
   return (
@@ -34,6 +35,7 @@ export function Plugins() {
       <HistoryPlugin />
       <TabIndentationPlugin />
       {onRef !== undefined && <EditorRefPlugin editorRef={onRef} />}
+      {maxLength && <MaxLengthPlugin maxLength={maxLength} />}
     </>
   );
 }
