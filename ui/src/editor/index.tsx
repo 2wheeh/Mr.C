@@ -7,6 +7,7 @@ import { Plugins } from '@/editor/plugins';
 import nodes from '@/editor/nodes';
 import theme from '@/editor/theme';
 import '@/styles/editor.css';
+import { EditorHistoryContext } from '@/context/editor/editor-history-context';
 
 // This has to be rendered on client side only (no ssr!)
 export default function Editor({
@@ -32,7 +33,9 @@ export default function Editor({
   return (
     <div className="editor">
       <LexicalComposer initialConfig={initialConfig}>
-        <Plugins />
+        <EditorHistoryContext>
+          <Plugins />
+        </EditorHistoryContext>
       </LexicalComposer>
     </div>
   );

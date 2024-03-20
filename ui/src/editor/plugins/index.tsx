@@ -6,6 +6,7 @@ import { useEditorRef } from '@/context/editor/editor-ref-context';
 import { MarkdownShortcutPlugin } from '@/editor/plugins/markdown-shorcut';
 import { EditorRefPlugin } from '@lexical/react/LexicalEditorRefPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
+import { HistoryPlugin } from '@/editor/plugins/history';
 
 function Placeholder() {
   return <div className="placeholder">Begin writing your review...</div>;
@@ -29,6 +30,7 @@ export function Plugins() {
       />
       <MarkdownShortcutPlugin />
       <ListPlugin />
+      <HistoryPlugin />
       {onRef !== undefined && <EditorRefPlugin editorRef={onRef} />}
     </>
   );
