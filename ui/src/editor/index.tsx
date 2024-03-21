@@ -14,10 +14,12 @@ export default function Editor({
   namespace,
   isNew,
   prepopulated,
+  maxLength,
 }: {
   namespace: string;
   isNew: boolean;
   prepopulated?: SerializedEditorState;
+  maxLength?: number;
 }) {
   const initialConfig: InitialConfigType = {
     editorState: JSON.stringify(prepopulated),
@@ -34,7 +36,7 @@ export default function Editor({
     <div className="editor">
       <LexicalComposer initialConfig={initialConfig}>
         <EditorHistoryContext>
-          <Plugins />
+          <Plugins maxLength={maxLength} />
         </EditorHistoryContext>
       </LexicalComposer>
     </div>
