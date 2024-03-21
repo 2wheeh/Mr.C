@@ -2,8 +2,8 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import { UserSelfChip } from '@/components/auth/client/user-self-chip';
-import Text from '@/components/common/server/text';
 import { BoardHeader } from '@/components/common/server/board-header';
+import Text from '@/components/common/server/text';
 import Time from '@/components/common/server/time';
 import { CreateReviewButton } from '@/components/review/client/create-review-button';
 import ReviewTitle from '@/components/review/client/review-title';

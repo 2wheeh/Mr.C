@@ -1,13 +1,15 @@
 'use client';
 
-import { LexicalComposer, type InitialConfigType } from '@lexical/react/LexicalComposer';
+import { type InitialConfigType, LexicalComposer } from '@lexical/react/LexicalComposer';
 import type { SerializedEditorState } from 'lexical';
 
-import { Plugins } from '@/editor/plugins';
-import nodes from '@/editor/nodes';
-import theme from '@/editor/theme';
-import '@/styles/editor.css';
 import { EditorHistoryContext } from '@/context/editor/editor-history-context';
+
+import nodes from '@/editor/nodes';
+import { Plugins } from '@/editor/plugins';
+import theme from '@/editor/theme';
+
+import '@/styles/editor.css';
 
 // This has to be rendered on client side only (no ssr!)
 export default function Editor({

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 import Text from '@/components/common/server/text';
 
 interface Link {

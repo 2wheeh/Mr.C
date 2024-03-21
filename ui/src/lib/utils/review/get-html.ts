@@ -1,6 +1,6 @@
-import type { SerializedEditorState } from 'lexical';
 import { $generateHtmlFromNodes } from '@lexical/html';
 import { JSDOM } from 'jsdom';
+import type { SerializedEditorState } from 'lexical';
 
 import createHeadlessEditor from '@/editor/headless';
 

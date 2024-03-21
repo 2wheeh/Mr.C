@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { NavLinks } from '@/components/common/client/nav-links';
-import { usePathname } from 'next/navigation';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+import { NavLinks } from '@/components/common/client/nav-links';
 
 export default function Sidebar({ SignButton }: { SignButton: JSX.Element }) {
   const [isOpen, setIsOpen] = useState(false);

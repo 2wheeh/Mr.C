@@ -1,5 +1,4 @@
 // TODO: Remove dummy after connected with backend apis
-
 import type { User } from '@/lib/definitions/auth';
 
 const dummyUser: User = {

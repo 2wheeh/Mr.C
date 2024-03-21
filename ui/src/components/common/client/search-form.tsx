@@ -1,20 +1,21 @@
 'use client';
 
 import {
-  MagnifyingGlassIcon,
-  PlusIcon,
-  MinusIcon,
   ArrowsRightLeftIcon,
+  MagnifyingGlassIcon,
+  MinusIcon,
+  PlusIcon,
 } from '@heroicons/react/24/outline';
-
+import { useSearchParams } from 'next/navigation';
 import { ChangeEventHandler } from 'react';
 
-import Text from '@/components/common/server/text';
-import { useSearchFormState } from '@/hooks/common/use-search-form-state';
-import { useDropdown } from '@/hooks/common/use-dropdown';
-import { FiltersProvider, useFilters } from '@/context/common/filters-context';
-import { useSearchParams } from 'next/navigation';
 import ChipButton from '@/components/common/client/chip-button';
+import Text from '@/components/common/server/text';
+
+import { FiltersProvider, useFilters } from '@/context/common/filters-context';
+
+import { useDropdown } from '@/hooks/common/use-dropdown';
+import { useSearchFormState } from '@/hooks/common/use-search-form-state';
 
 function FilterInput({ filter }: { filter: string }) {
   const {

@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-import { Toast, type ToastData } from '@/components/common/client/toast';
 import Portal from '@/components/common/client/portal';
+import { Toast, type ToastData } from '@/components/common/client/toast';
 
 // Visible toasts amount
 const VISIBLE_TOASTS_AMOUNT = 5;

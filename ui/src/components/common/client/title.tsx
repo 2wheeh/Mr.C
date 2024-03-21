@@ -2,11 +2,11 @@
 
 import clsx from 'clsx';
 import {
-  useRef,
-  useLayoutEffect,
-  useImperativeHandle,
-  forwardRef,
   type ChangeEventHandler,
+  forwardRef,
+  useImperativeHandle,
+  useLayoutEffect,
+  useRef,
 } from 'react';
 
 import '@/styles/editor-theme.css';

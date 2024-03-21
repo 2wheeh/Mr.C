@@ -1,4 +1,4 @@
-import { $nodesOfType, TextNode, type EditorState } from 'lexical';
+import { $nodesOfType, type EditorState, TextNode } from 'lexical';
 
 export function getReviewContent(editorState: EditorState) {
   try {

@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
-import '@/styles/globals.css';
-import { notoSansKr } from '@/styles/fonts';
+
 import { AuthProvider } from '@/context/auth/auth-context';
 import { ToastProvider } from '@/context/common/toast-context';
+
+import { notoSansKr } from '@/styles/fonts';
+import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Home',

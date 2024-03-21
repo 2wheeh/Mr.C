@@ -1,8 +1,9 @@
-import { NavLinks } from '@/components/common/client/nav-links';
-import Logo from '@/components/common/server/logo';
-import SideBar from '@/components/common/client/sidebar';
 import Link from 'next/link';
+
 import SignButton from '@/components/auth/client/sign-button';
+import { NavLinks } from '@/components/common/client/nav-links';
+import SideBar from '@/components/common/client/sidebar';
+import Logo from '@/components/common/server/logo';
 
 export function Header() {
   return (
